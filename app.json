@@ -27,7 +27,21 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "react-native-radar",
+        {
+          "iosFraud": true,
+          "iosNSLocationWhenInUseUsageDescription": "Your location permission prompt",
+          "iosNSLocationAlwaysAndWhenInUseUsageDescription": "Your location permission prompt",
+          "iosNSMotionUsageDescription": "This app uses the motion service to provide motion-based services.",
+          "iosBackgroundMode": true,
+          "androidFraud": true,
+          "androidBackgroundPermission": true,
+          "androidFineLocationPermission": true,
+          "addRadarSDKMotion":true
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
