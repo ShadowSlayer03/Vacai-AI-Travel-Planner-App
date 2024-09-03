@@ -12,7 +12,6 @@ export default function Index() {
       }}
     >
       {user ? <Redirect href={"/mytrip"}></Redirect> : <Login />}
-      <Login />
     </View>
   );
 }

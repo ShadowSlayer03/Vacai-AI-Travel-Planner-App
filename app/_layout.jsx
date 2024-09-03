@@ -1,8 +1,13 @@
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { View, ActivityIndicator } from "react-native";
+import { useState } from "react";
+import { CreateTripContext } from "@/context/CreateTripContext"
+
 
 export default function RootLayout() {
+  const [tripData, setTripData] = useState([]);
+
   const [fontsLoaded] = useFonts({
     "nunito": require("../assets/fonts/Nunito-Regular.ttf"),
     "nunito-light": require("../assets/fonts/Nunito-Light.ttf"),
@@ -20,11 +25,13 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{
-      headerShown: false
-    }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="(tabs)" />
-    </Stack>
+    <CreateTripContext.Provider value={{ tripData, setTripData }}>
+      <Stack screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </CreateTripContext.Provider>
   );
 }
