@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ai_travel_planner_react_native",
-    "slug": "ai_travel_planner_react_native",
+    "name": "AI travel planner application",
+    "slug": "ai-travel-planner-application",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -27,24 +27,19 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
-      [
-        "react-native-radar",
-        {
-          "iosFraud": true,
-          "iosNSLocationWhenInUseUsageDescription": "Your location permission prompt",
-          "iosNSLocationAlwaysAndWhenInUseUsageDescription": "Your location permission prompt",
-          "iosNSMotionUsageDescription": "This app uses the motion service to provide motion-based services.",
-          "iosBackgroundMode": true,
-          "androidFraud": true,
-          "androidBackgroundPermission": true,
-          "androidFineLocationPermission": true,
-          "addRadarSDKMotion":true
-        }
-      ]
+      "expo-router"
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "34c34c3e-59f6-497b-8007-4bf882852b5c"
+      }
+    },
+    "owner": "shadowslayer03"
   }
 }
