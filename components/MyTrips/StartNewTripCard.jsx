@@ -29,7 +29,7 @@ const StartNewTripCard = () => {
                 Looks like it's a perfect time to plan a new travel experience! Get Started Now!
             </Text>
 
-            <TouchableOpacity activeOpacity={0.7} onPress={() => router.push("/create-trip/search-place")} style={{
+            <TouchableOpacity activeOpacity={0.7} onPress={() => router.replace("create-trip/search-from-place")} style={{
                 padding: 15,
                 backgroundColor: Colors.primary,
                 borderRadius: 20,
