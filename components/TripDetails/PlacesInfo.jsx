@@ -14,29 +14,26 @@ const PlacesInfo = ({ placesData }) => {
 
     useEffect(() => {
         const fetchCoordinates = async () => {
-            if (!placesData || placesData.length === 0) {
-                console.warn("placesData is undefined or empty");
-                return;
-            }
+            if (placesData || placesData?.length != 0) {
+                try {
+                    const placeSearchPromises = placesData.map(async (place) => {
+                        const placeSearchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(place?.name)},${encodeURIComponent(place?.address)}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
+                        const response = await axios.get(placeSearchURL);
+                        const location = response?.data?.results?.[0]?.geometry?.location;
 
-            try {
-                const placeSearchPromises = placesData.map(async (place) => {
-                    const placeSearchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(place?.name)}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
-                    const response = await axios.get(placeSearchURL);
-                    const location = response?.data?.results?.[0]?.geometry?.location;
+                        if (location) {
+                            return { latitude: location.lat, longitude: location.lng };
+                        } else {
+                            console.error(`Place search failed for place: ${place?.name}`);
+                            return null;
+                        }
+                    });
 
-                    if (location) {
-                        return { latitude: location.lat, longitude: location.lng };
-                    } else {
-                        console.error(`Place search failed for place: ${place?.name}`);
-                        return null;
-                    }
-                });
-
-                const resolvedCoordinates = await Promise.all(placeSearchPromises);
-                setCoordinates(resolvedCoordinates.filter(coord => coord !== null));
-            } catch (error) {
-                console.error("An error occurred while fetching coordinates:", error);
+                    const resolvedCoordinates = await Promise.all(placeSearchPromises);
+                    setCoordinates(resolvedCoordinates.filter(coord => coord !== null));
+                } catch (error) {
+                    console.error("An error occurred while fetching coordinates:", error);
+                }
             }
         };
 
@@ -52,6 +49,7 @@ const PlacesInfo = ({ placesData }) => {
                 paddingLeft: 15
             }}>Places</Text>
             <FlatList
+                nestedScrollEnabled
                 data={placesData}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (

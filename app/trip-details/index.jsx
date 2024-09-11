@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     backButton: {
         marginBottom: 10,
-        marginLeft: 20
+        marginLeft: 20,
     },
     image: {
         width: "100%",

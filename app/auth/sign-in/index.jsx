@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRouter } from 'expo-router';
 import { Colors } from "../../../constants/Colors.ts"
@@ -20,9 +20,6 @@ const SignIn = () => {
     }, [])
 
     const handleLogin = () => {
-        if (!email || !password) {
-            ToastAndroid.show("Please enter email and password!", ToastAndroid.BOTTOM);
-        }
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -33,6 +30,7 @@ const SignIn = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log("Error occurred in Firebase Auth:",errorCode,errorMessage);
+                Alert.alert("Error!",`${errorCode}`);
             });
     }
 

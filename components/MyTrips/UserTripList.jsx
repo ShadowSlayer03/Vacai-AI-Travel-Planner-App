@@ -107,7 +107,25 @@ const UserTripList = ({ userTrips }) => {
                         textAlign: "center",
                         fontFamily: "nunito",
                         fontSize: 15
-                    }}>See Your Plan</Text>
+                    }}>Travel Details</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => router.push({ pathname: "/complete-itinerary", params: { itinerary: JSON.stringify(userTrips[0]?.tripDetails?.itinerary) } })}
+                    activeOpacity={0.7}
+                    style={{
+                        backgroundColor: Colors.primary,
+                        padding: 15,
+                        borderRadius: 15,
+                        marginBottom: 15
+                    }}
+                >
+                    <Text style={{
+                        color: Colors.white,
+                        textAlign: "center",
+                        fontFamily: "nunito",
+                        fontSize: 15
+                    }}>Complete Itinerary</Text>
                 </TouchableOpacity>
 
                 {userTrips.map((trip, index) => (
