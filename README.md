@@ -1,50 +1,79 @@
-# Welcome to your Expo app 👋
+# Vacai - AI Travel Planner App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Vacai** is an AI-powered travel planner application that allows users to effortlessly plan their trips with personalized suggestions for destinations, places to visit, restaurants, and hotels. With Vacai, you can generate a complete travel itinerary, view maps, explore places, and get recommendations for an unforgettable vacation experience.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **User Authentication**: Secure login and sign-up process for personalized trip planning.
+- **Set Destination**: Input your destination and receive smart suggestions powered by AI.
+- **Who's Travelling**: Specify the people going on the trip to personalize recommendations.
+- **Trip Dates**: Select the start and end dates for your vacation.
+- **Budget Setting**: Define a budget for your trip to get tailored suggestions based on your spending limits.
+- **AI-generated Trip Itinerary**:
+  - View complete travel details, including places to visit, restaurants, and hotels.
+  - See recommendations for each day of your trip.
+  - Explore maps and location details for each place.
+  - View photos of destinations, restaurants, and hotels.
+  - Discover top attractions and hidden gems in your travel destination.
+- **Complete Itinerary Page**: A dedicated page for your entire trip plan, showing the itinerary for each day.
+
+## Tech Stack
+
+- **React Native**: Cross-platform mobile app development.
+- **Expo**: Framework for building and deploying React Native applications.
+- **Firebase Authentication**: Secure user authentication for sign-in and sign-up.
+- **Firestore Database**: NoSQL cloud database for storing travel data.
+- **Gemini AI**: Powering the AI travel planning feature.
+- **Google APIs**: Google Autocomplete, Places, and Images API for location and photo data.
+- **Lottie**: For engaging and smooth animations.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/ShadowSlayer03/Vacai-AI-Travel-Planner-App.git
+   cd <name of the folder>
+   ```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+   OR if u get peer deps issue,
 
    ```bash
-    npx expo start
+   npm install --legacy-peer-deps
    ```
 
-In the output, you'll find options to open the app in a
+3. Add the environment variables as provided in the .env.sample.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. Start the Expo development server:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   ```bash
+   npm run start
+   ```
 
-## Get a fresh project
+## Contributing
 
-When you're ready, run:
+1. Fork the repository.
 
-```bash
-npm run reset-project
-```
+2. Create a new feature branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add some feature'
+   ```
 
-## Learn more
+4. Push to the branch:
+   ```bash
+   git push origin feature/your-feature
+   ```
 
-To learn more about developing your project with Expo, look at the following resources:
+5. Open a Pull Request.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
