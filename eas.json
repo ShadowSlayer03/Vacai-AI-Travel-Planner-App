@@ -19,7 +19,7 @@
       "production": {}
     },
     "cli": {
-      "appVersionSource": "native"
+      "appVersionSource": "local"
     }
   }
   
