@@ -59,7 +59,19 @@ const RestaurantInfo = ({ restaurantData = [] }) => {
     }, [restaurantData]);
 
     const handleExternalLink = (url) => {
-        Linking.openURL(url).catch((err) => alert("Failed to open URL", err.message));
+        if (!url) {
+            alert("Sorry! Restaurant URL unavailable");
+            return;
+        }
+
+        // Ensure the URL starts with http/https
+        if (!/^https?:\/\//i.test(url)) {
+            url = "https://" + url;
+        }
+
+        Linking.openURL(url).catch((err) => {
+            alert("Failed to open URL: " + err.message);
+        });
     };
 
     if (loading) {

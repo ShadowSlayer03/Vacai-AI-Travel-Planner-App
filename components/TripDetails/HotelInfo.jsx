@@ -57,7 +57,19 @@ const HotelInfo = ({ hotelData = [] }) => {
 
 
     const handleExternalLink = (url) => {
-        Linking.openURL(url).catch((err) => alert("Failed to open URL", err.message));
+        if (!url) {
+            alert("Sorry! Hotel URL unavailable");
+            return;
+        }
+
+        // Ensure the URL starts with http/https
+        if (!/^https?:\/\//i.test(url)) {
+            url = "https://" + url;
+        }
+
+        Linking.openURL(url).catch((err) => {
+            alert("Failed to open URL: " + err.message);
+        });
     };
 
     if (loading) {
@@ -76,7 +88,7 @@ const HotelInfo = ({ hotelData = [] }) => {
                 height={width * 0.8}
                 autoPlay={true}
                 autoPlayInterval={3000}
-                data={hotels!=undefined && hotels}
+                data={hotels != undefined && hotels}
                 scrollAnimationDuration={1000}
                 renderItem={({ item }) => (
                     <TouchableOpacity

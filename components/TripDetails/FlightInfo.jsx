@@ -6,8 +6,21 @@ import { TouchableOpacity } from 'react-native'
 const FlightInfo = ({ flightData }) => {
 
     const handleExternalLink = (url) => {
-        Linking.openURL(url).catch((err) => alert("Failed to open URL", err.message));
+        if (!url) {
+            alert("Sorry! Flight booking URL unavailable");
+            return;
+        }
+
+        // Ensure the URL starts with http/https
+        if (!/^https?:\/\//i.test(url)) {
+            url = "https://" + url;
+        }
+
+        Linking.openURL(url).catch((err) => {
+            alert("Failed to open URL: " + err.message);
+        });
     };
+
 
     return (
         <View style={{

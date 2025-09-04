@@ -75,7 +75,8 @@ const UserTripList = ({ userTrips }) => {
                         )}
                         <Text style={{
                             fontFamily: "nunito-semibold",
-                            fontSize: 20
+                            fontSize: 20,
+                            marginLeft: 8
                         }}>
                             {parsedTripData?.traveller?.title}
                         </Text>
@@ -130,9 +131,26 @@ const UserTripList = ({ userTrips }) => {
                     }}>Complete Itinerary</Text>
                 </TouchableOpacity>
 
-                {userTrips.map((trip, index) => (
-                    <UserTripCard key={index} trip={trip} />
-                ))}
+                {userTrips?.map((trip, index) => {
+                    const parsed = JSON.parse(trip.tripData);
+
+                    return (
+                        <View key={index} style={{ marginTop: 10 }}>
+                            {/* Card is clickable */}
+                            <TouchableOpacity
+                                onPress={() =>
+                                    router.push({
+                                        pathname: "/trip-details",
+                                        params: { trip: JSON.stringify(trip) },
+                                    })
+                                }
+                                activeOpacity={0.8}
+                            >
+                                <UserTripCard trip={trip} />
+                            </TouchableOpacity>
+                        </View>
+                    );
+                })}
             </View>
         </View>
     );

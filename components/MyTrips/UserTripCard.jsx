@@ -39,7 +39,7 @@ const UserTripCard = ({ trip }) => {
       {imgUrl ? (
         <Image
           style={{
-            width: 100,
+            width: 120,
             height: 100,
             borderRadius: 15
           }}

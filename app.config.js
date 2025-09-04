@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default ({ config }) => ({
   ...config,
-  name: "AI travel planner application",
+  name: "Vacai",
   slug: "ai-travel-planner-application",
   version: "1.0.0",
   orientation: "portrait",
@@ -10,7 +10,7 @@ export default ({ config }) => ({
   scheme: "myapp",
   userInterfaceStyle: "automatic",
   splash: {
-    image: "./assets/images/splash.png",
+    image: "./assets/images/splash_resized.png",
     resizeMode: "contain",
     backgroundColor: "#ffffff",
   },
@@ -19,8 +19,8 @@ export default ({ config }) => ({
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: "./assets/images/vacai-bw.png",
-      backgroundColor: "#ffffff",
+      foregroundImage: "./assets/images/icon.jpg",
+      backgroundColor: "#000000",
     },
     package: "com.shadowslayer03.aitravelplannerapplication",
   },
