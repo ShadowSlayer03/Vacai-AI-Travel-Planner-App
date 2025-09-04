@@ -75,7 +75,7 @@ const HotelInfo = ({ hotelData = [] }) => {
                 height={width * 0.8}
                 autoPlay={true}
                 autoPlayInterval={3000}
-                data={hotels}
+                data={hotels!=undefined && hotels}
                 scrollAnimationDuration={1000}
                 renderItem={({ item }) => (
                     <TouchableOpacity

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Linking } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Linking, Image } from 'react-native';
 import { Colors } from '../../constants/Colors';
 import axios from 'axios';
 
@@ -14,9 +13,9 @@ const PlacesInfo = ({ placesData }) => {
 
     useEffect(() => {
         const fetchCoordinates = async () => {
-            if (placesData || placesData?.length != 0) {
+            if (Array.isArray(placesData) && placesData?.length > 0) {
                 try {
-                    const placeSearchPromises = placesData.map(async (place) => {
+                    const placeSearchPromises = placesData?.map(async (place) => {
                         const placeSearchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(place?.name)},${encodeURIComponent(place?.address)}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
                         const response = await axios.get(placeSearchURL);
                         const location = response?.data?.results?.[0]?.geometry?.location;
@@ -40,6 +39,7 @@ const PlacesInfo = ({ placesData }) => {
         fetchCoordinates();
     }, [placesData]);
 
+
     return (
         <View>
             <Text style={{
@@ -50,38 +50,49 @@ const PlacesInfo = ({ placesData }) => {
             }}>Places</Text>
             <FlatList
                 nestedScrollEnabled
-                data={placesData}
+                data={placesData || []}
                 keyExtractor={(item, index) => index.toString()}
+                scrollEnabled={false}
+                removeClippedSubviews={false}
+                ListHeaderComponent={
+                    <Text
+                        style={{
+                            fontFamily: "nunito-bold",
+                            fontSize: 20,
+                            marginVertical: 20,
+                            paddingLeft: 15,
+                        }}
+                    >
+                        Some cool places to visit:
+                    </Text>
+                }
                 renderItem={({ item, index }) => (
                     coordinates[index] ? (
                         <View style={styles.card}>
-                            <TouchableOpacity activeOpacity={0.7} onPress={() => openMap(coordinates[index].latitude, coordinates[index].longitude)}>
-                                <MapView
-                                    style={styles.map}
-                                    region={{
-                                        latitude: coordinates[index].latitude,
-                                        longitude: coordinates[index].longitude,
-                                        latitudeDelta: 0.02,
-                                        longitudeDelta: 0.02,
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={() => openMap(coordinates[index].latitude, coordinates[index].longitude)}
+                            >
+                                <Image
+                                    style={{ height: 200, borderRadius: 10 }}
+                                    source={{
+                                        uri: `https://maps.googleapis.com/maps/api/staticmap?center=${coordinates[index].latitude},${coordinates[index].longitude}&zoom=14&size=400x200&markers=color:red%7C${coordinates[index].latitude},${coordinates[index].longitude}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`
                                     }}
-                                    showsUserLocation={false}
-                                    loadingEnabled={true}
-                                >
-                                    <Marker
-                                        coordinate={coordinates[index]}
-                                        title={item.name}
-                                        description={item.description}
-                                    />
-                                </MapView>
+                                />
+
                             </TouchableOpacity>
                             <View style={styles.infoContainer}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.description}>{item.description}</Text>
-                                <Text style={styles.bestTimes}>Best time to visit: {item.best_times_to_visit}</Text>
+                                <Text style={styles.bestTimes}>
+                                    Best time to visit: {item.best_times_to_visit}
+                                </Text>
                                 <Text style={styles.entryFee}>Entry fee: {item.entry_fees}</Text>
                                 <Text style={styles.address}>Address: {item.address}</Text>
                                 <View style={styles.ratingContainer}>
-                                    <Text style={styles.rating}>Rating: {item.rating} ({item.total_reviews} reviews)</Text>
+                                    <Text style={styles.rating}>
+                                        Rating: {item.rating} ({item.total_reviews} reviews)
+                                    </Text>
                                 </View>
                             </View>
                         </View>
@@ -91,6 +102,7 @@ const PlacesInfo = ({ placesData }) => {
                 )}
                 contentContainerStyle={styles.listContent}
             />
+
         </View>
 
     );

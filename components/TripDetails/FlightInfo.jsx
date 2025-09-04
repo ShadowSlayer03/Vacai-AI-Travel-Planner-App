@@ -27,7 +27,7 @@ const FlightInfo = ({ flightData }) => {
 
             </View>
 
-            {flightData && flightData.map((data, index) => (
+            {flightData && flightData?.map((data, index) => (
                 <View key={index} style={{
                     marginTop: 20
                 }}>
