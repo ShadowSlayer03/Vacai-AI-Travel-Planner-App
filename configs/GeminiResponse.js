@@ -1,7 +1,10 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import Constants from "expo-constants";
+
+const geminiApiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_GEMINI_API_KEY
 
 const genAI = new GoogleGenerativeAI(
-  process.env.EXPO_PUBLIC_GOOGLE_GEMINI_API_KEY
+  geminiApiKey
 );
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

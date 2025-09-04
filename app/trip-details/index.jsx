@@ -10,6 +10,7 @@ import TransportInfo from "../../components/TripDetails/TransportInfo";
 import PlacesInfo from "../../components/TripDetails/PlacesInfo";
 import RestaurantInfo from "../../components/TripDetails/RestaurantInfo";
 import moment from "moment";
+import Constants from "expo-constants";
 
 function TripDetails() {
     const navigation = useNavigation();
@@ -19,6 +20,8 @@ function TripDetails() {
     const [imgUrl, setImgUrl] = useState("");
     const [parsedTrip, setParsedTrip] = useState(null);
     const [parsedTripData, setParsedTripData] = useState(null);
+
+    const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
 
     useEffect(() => {
         navigation.setOptions({
@@ -45,7 +48,7 @@ function TripDetails() {
     useEffect(() => {
         if (parsedTripData?.locationInfo?.photoRef) {
             const photoRef = parsedTripData.locationInfo.photoRef;
-            const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
+            const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${apiKey}`;
             setImgUrl(placesImageURL);
         }
     }, [parsedTripData]);

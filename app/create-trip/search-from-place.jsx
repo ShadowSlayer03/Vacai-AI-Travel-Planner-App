@@ -5,11 +5,13 @@ import { Colors } from '../../constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { CreateTripContext } from "../../context/CreateTripContext";
+import Constants from "expo-constants";
 
 const SearchPlace = () => {
   const navigation = useNavigation();
   const router = useRouter();
   const { tripData, setTripData } = useContext(CreateTripContext);
+  const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
 
   useEffect(() => {
     navigation.setOptions({
@@ -55,7 +57,7 @@ const SearchPlace = () => {
             router.push("/create-trip/search-to-place");
           }}
           query={{
-            key: process.env.EXPO_PUBLIC_GOOGLE_API_KEY,
+            key: apiKey,
             language: 'en',
           }}
           styles={{

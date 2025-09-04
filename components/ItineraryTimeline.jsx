@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Colors } from '../constants/Colors';
-import Timeline from "react-native-just-timeline";
+import { Timeline } from "react-native-just-timeline";
 
 const ItineraryTimeline = ({ singleParsedItinerary }) => {
 
@@ -99,7 +99,7 @@ const ItineraryTimeline = ({ singleParsedItinerary }) => {
                 <Text style={styles.textStyle}>Day: {singleParsedItinerary.day}</Text>
                 <Text style={styles.textStyle}>Date: {singleParsedItinerary.date}</Text>
             </View>
-            <Timeline data={data} />
+            <Timeline scrollEnabled={false} removeClippedSubviews={false} data={data} />
         </View>
     );
 };

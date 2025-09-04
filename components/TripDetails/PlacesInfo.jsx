@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Linking, Image } from 'react-native';
 import { Colors } from '../../constants/Colors';
 import axios from 'axios';
+import Constants from "expo-constants";
 
 const PlacesInfo = ({ placesData }) => {
     const [coordinates, setCoordinates] = useState([]);
+    const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
 
     const openMap = (latitude, longitude) => {
         const url = `https://www.google.com/maps/?q=${latitude},${longitude}`;
@@ -16,7 +18,7 @@ const PlacesInfo = ({ placesData }) => {
             if (Array.isArray(placesData) && placesData?.length > 0) {
                 try {
                     const placeSearchPromises = placesData?.map(async (place) => {
-                        const placeSearchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(place?.name)},${encodeURIComponent(place?.address)}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
+                        const placeSearchURL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(place?.name)},${encodeURIComponent(place?.address)}&key=${apiKey}`;
                         const response = await axios.get(placeSearchURL);
                         const location = response?.data?.results?.[0]?.geometry?.location;
 
@@ -76,7 +78,7 @@ const PlacesInfo = ({ placesData }) => {
                                 <Image
                                     style={{ height: 200, borderRadius: 10 }}
                                     source={{
-                                        uri: `https://maps.googleapis.com/maps/api/staticmap?center=${coordinates[index].latitude},${coordinates[index].longitude}&zoom=14&size=400x200&markers=color:red%7C${coordinates[index].latitude},${coordinates[index].longitude}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`
+                                        uri: `https://maps.googleapis.com/maps/api/staticmap?center=${coordinates[index].latitude},${coordinates[index].longitude}&zoom=14&size=400x200&markers=color:red%7C${coordinates[index].latitude},${coordinates[index].longitude}&key=${apiKey}`
                                     }}
                                 />
 

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, Linking, Dimensions, ActivityIndicator } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import axios from 'axios';
-import { Colors } from '../../constants/Colors'; // Ensure you have defined this
+import { Colors } from '../../constants/Colors';
+import Constants from "expo-constants";
 
 const RestaurantInfo = ({ restaurantData = [] }) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -10,10 +11,11 @@ const RestaurantInfo = ({ restaurantData = [] }) => {
 
     const { width } = Dimensions.get('window');
 
+    const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
+    const searchEngineId = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_CX_ID;
+
     // Function to fetch images
     const fetchImages = async (query, index) => {
-        const apiKey = process.env.EXPO_PUBLIC_GOOGLE_API_KEY;
-        const searchEngineId = process.env.EXPO_PUBLIC_GOOGLE_CX_ID;
         const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${apiKey}&cx=${searchEngineId}&searchType=image&num=1`;
 
         try {

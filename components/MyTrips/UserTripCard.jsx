@@ -2,10 +2,13 @@ import { View, Text, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Colors } from '../../constants/Colors';
+import Constants from "expo-constants";
 
 const UserTripCard = ({ trip }) => {
   const [parsedTripData, setParsedTripData] = useState();
   const [imgUrl, setImgUrl] = useState("");
+
+  const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
 
   useEffect(() => {
     if (trip && trip?.tripData) {
@@ -18,7 +21,7 @@ const UserTripCard = ({ trip }) => {
     if (parsedTripData) {
       const photoRef = parsedTripData?.locationInfo?.photoRef;
       if (photoRef) {
-        const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
+        const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${apiKey}`;
         //console.log("Places Image URL:", placesImageURL);
         setImgUrl(placesImageURL);
       }

@@ -4,11 +4,13 @@ import moment from 'moment';
 import { Colors } from '../../constants/Colors';
 import UserTripCard from './UserTripCard';
 import { useRouter } from 'expo-router';
+import Constants from "expo-constants";
 
 const UserTripList = ({ userTrips }) => {
     const router = useRouter();
     const [parsedTripData, setParsedTripData] = useState(null);
     const [imgUrl, setImgUrl] = useState("");
+    const apiKey = Constants.expoConfig.extra.EXPO_PUBLIC_GOOGLE_API_KEY;
 
     useEffect(() => {
         if (userTrips?.length > 0) {
@@ -21,7 +23,7 @@ const UserTripList = ({ userTrips }) => {
         if (parsedTripData) {
             const photoRef = parsedTripData?.locationInfo?.photoRef;
             if (photoRef) {
-                const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${process.env.EXPO_PUBLIC_GOOGLE_API_KEY}`;
+                const placesImageURL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1500&photoreference=${photoRef}&key=${apiKey}`;
                 setImgUrl(placesImageURL);
             }
         }
