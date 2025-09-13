@@ -28,7 +28,7 @@ const SignUp = () => {
       .then((userCredential) => { 
         const user = userCredential.user;
         console.log("User from Firebase Auth:",user);
-        router.replace("/sign-in");
+        router.replace("/auth/sign-in");
       })
       .catch((error) => {
         const errorCode = error.code;
